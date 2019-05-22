@@ -13,11 +13,15 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(not(feature = "std"), feature(alloc, core_intrinsics))]
 
+
+
 #[cfg(feature = "std")]
 extern crate core;
-
 #[cfg(not(feature = "std"))]
 extern crate alloc;
+extern crate libm;
+use libm::F32Ext;
+use libm::F64Ext;
 
 #[cfg(not(feature = "std"))]
 type BTreeMap<K, V> = alloc::collections::btree_map::BTreeMap<K, V>;
@@ -70,74 +74,35 @@ pub mod interpolate;
 mod ops {
     pub mod f32 {
         #[allow(unused_imports)]
-        use core;
-
-        #[cfg(not(feature = "std"))]
-        pub fn sqrt(x: f32) -> f32 {
-            unsafe { core::intrinsics::sqrtf32(x) }
-        }
-        #[cfg(feature = "std")]
+        use libm::F32Ext;
         pub fn sqrt(x: f32) -> f32 {
             x.sqrt()
         }
 
-        #[cfg(feature = "std")]
         pub fn powf32(a: f32, b: f32) -> f32 {
             a.powf(b)
-        }
-        #[cfg(not(feature = "std"))]
-        pub fn powf32(a: f32, b: f32) -> f32 {
-            unsafe { core::intrinsics::powf32(a, b) }
         }
     }
 
     pub mod f64 {
         #[allow(unused_imports)]
-        use core;
-
-        #[cfg(not(feature = "std"))]
-        pub fn floor(x: f64) -> f64 {
-            unsafe { core::intrinsics::floorf64(x) }
-        }
-        #[cfg(feature = "std")]
+        use libm::F64Ext;
         pub fn floor(x: f64) -> f64 {
             x.floor()
         }
-
-        #[cfg(not(feature = "std"))]
-        #[allow(dead_code)]
-        pub fn ceil(x: f64) -> f64 {
-            unsafe { core::intrinsics::ceilf64(x) }
-        }
-        #[cfg(feature = "std")]
         #[allow(dead_code)]
         pub fn ceil(x: f64) -> f64 {
             x.ceil()
         }
 
-        #[cfg(not(feature = "std"))]
-        pub fn sin(x: f64) -> f64 {
-            unsafe { core::intrinsics::sinf64(x) }
-        }
-        #[cfg(feature = "std")]
         pub fn sin(x: f64) -> f64 {
             x.sin()
         }
 
-        #[cfg(not(feature = "std"))]
-        pub fn cos(x: f64) -> f64 {
-            unsafe { core::intrinsics::cosf64(x) }
-        }
-        #[cfg(feature = "std")]
         pub fn cos(x: f64) -> f64 {
             x.cos()
         }
 
-        #[cfg(not(feature = "std"))]
-        pub fn sqrt(x: f64) -> f64 {
-            unsafe { core::intrinsics::sqrtf64(x) }
-        }
-        #[cfg(feature = "std")]
         pub fn sqrt(x: f64) -> f64 {
             x.sqrt()
         }
