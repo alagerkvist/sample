@@ -175,7 +175,7 @@ Currently, only nightly is supported, because it explicitly depends on the
 the math. If this restriction is onerous for you, it can be lifted with minor
 loss of functionality (the `Signal::bus` method), so open an issue!
 
-If you want to use it on an embedded system, you need to use your own `GlobalAlloc`. 
+If you want to use it on an embedded system, you need to use your own `GlobalAlloc`. The original repo (https://github.com/RustAudio/sample) is using core::intrinsics, however, then a C implementation of libm needed to be linked (https://github.com/rust-lang/rfcs/issues/2505). The best part is that it's now a libm Rust-lib which is used here (https://github.com/rust-lang-nursery/libm). 
 
 
 Contributions
