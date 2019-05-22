@@ -175,6 +175,8 @@ Currently, only nightly is supported, because it explicitly depends on the
 the math. If this restriction is onerous for you, it can be lifted with minor
 loss of functionality (the `Signal::bus` method), so open an issue!
 
+If you want to use it on an embedded system, you need to use your own `GlobalAlloc`. 
+
 
 Contributions
 -------------
